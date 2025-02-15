@@ -15,8 +15,8 @@ module BibleRef
     rule(:chapter_and_verse_range) do
       (ref_range | ref | chapter) >>
       (
-        separator >>
-        (ref_range | verse_range | ref | verse)
+        ((separator) >>
+        (ref_range | verse_range | ref | chapter )) | (verse_sep >> (verse_range | verse))
       ).repeat
     end
 
@@ -30,7 +30,8 @@ module BibleRef
     rule(:verse)       { num.as(:verse) }
 
     rule(:word)        { (match("[123]").maybe >> match("[^0-9]").repeat(1)).as(:word) }
-    rule(:separator)   { (str(";") >> space.maybe) | (space.maybe >> (str("&") | str("u") | str("und")) >> space.maybe) | str(".") }
+    rule(:separator)   { (str(";") >> space.maybe) | (space.maybe >> (str("&") | str("u") | str("und")) >> space.maybe)}
+    rule(:verse_sep)    { str(".") }
     rule(:num)         { match("[0-9]").repeat(1).as(:num) }
     rule(:space)       { str(" ").repeat(1) }
 

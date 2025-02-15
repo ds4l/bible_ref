@@ -12,8 +12,8 @@ module BibleRef
 
       def books
         {
-          'GEN' => { match: /^(gen|1\.? mose)/i,              name: '1. Mose'                },
-          'EXO' => { match: /^(ex|2\.? mose)/i,               name: '2. Mose'                 },
+          'GEN' => { match: /^(gen|1\.? ?mose)/i, name: '1. Mose' },
+          'EXO' => { match: /^(ex|2\.? mose)/i,  name: '2. Mose' },
           'LEV' => { match: /^(le?v|3\.? mose)/i,             name: '3. Mose'              },
           'NUM' => { match: /^(nu|4\.? mose)/i,               name: '4. Mose'                },
           'DEU' => { match: /^d(e?ut|eu|5\.? mose)/i,       name: '5. Mose'            },
@@ -74,8 +74,8 @@ module BibleRef
           'JHN' => { match: /^(john|jn|jhn)/,    name: 'Johannes'                   },
           'ACT' => { match: /^act/,              name: 'Apostelgeschichte'                   },
           'ROM' => { match: /^rom/,              name: 'Römer'                 },
-          '1CO' => { match: /^1 ?cor?/,          name: '1. Korinther'          },
-          '2CO' => { match: /^2 ?cor?/,          name: '2. Korinther'          },
+          '1CO' => { match: /^1\.? ?cor?/,          name: '1. Korinther'          },
+          '2CO' => { match: /^2\.? ?cor?/,          name: '2. Korinther'          },
           'GAL' => { match: /^gal/,              name: 'Galater'              },
           'EPH' => { match: /^eph/,              name: 'Epheser'              },
           'PHP' => { match: /^(phil$|philip|phillip|php|pp)/, name: 'Philipper' },
