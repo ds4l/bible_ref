@@ -30,8 +30,8 @@ module BibleRef
     rule(:verse)       { num.as(:verse) }
 
     rule(:word)        { (match("[123]").maybe >> match("[^0-9]").repeat(1)).as(:word) }
-    rule(:separator)   { (str(";") >> space.maybe) | (space.maybe >> (str("&") | str("und") | str("u")) >> space.maybe)}
-    rule(:verse_sep)    { str(".") }
+    rule(:separator)   { (str(";") >> space.maybe) }
+    rule(:verse_sep)   { str(".") | (space.maybe >> (str("&") | str("und") | str("u.") | str("u")) >> space.maybe) }
     rule(:num)         { match("[0-9]").repeat(1).as(:num) }
     rule(:space)       { str(" ").repeat(1) }
 
