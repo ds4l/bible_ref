@@ -13,10 +13,10 @@ module BibleRef
       def books
         {
           'GEN' => { match: /^(gen|1\.? ?mose)/, name: '1. Mose' },
-          'EXO' => { match: /^(ex|2\.? mose)/,  name: '2. Mose' },
-          'LEV' => { match: /^(le?v|3\.? mose)/,             name: '3. Mose'              },
-          'NUM' => { match: /^(nu|4\.? mose)/,               name: '4. Mose'                },
-          'DEU' => { match: /^d(e?ut|eu|5\.? mose)/,       name: '5. Mose'            },
+          'EXO' => { match: /^(ex|2\.? ?mose)/,  name: '2. Mose' },
+          'LEV' => { match: /^(le?v|3\.? ?mose)/,             name: '3. Mose'              },
+          'NUM' => { match: /^(nu|4\.? ?mose)/,               name: '4. Mose'                },
+          'DEU' => { match: /^d(e?ut|eu)|^5\.? ?mose/,       name: '5. Mose'            },
           'JOS' => { match: /^jos/,              name: 'Josua'                 },
           'JDG' => { match: /^(ju?dg|ri)/,            name: 'Richter'                 },
           'RUT' => { match: /^ru/,               name: 'Ruth'                   },
