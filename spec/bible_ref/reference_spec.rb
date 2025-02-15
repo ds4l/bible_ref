@@ -28,6 +28,16 @@ describe BibleRef::Reference do
         end
       end
     end
+
+    context 'given a complex bible reference in german' do
+      subject { BibleRef::Reference.new('2. Korinther 1,3-6 und 9; 2,5', language: 'de') }
+
+      it 'returns the correct links for bibleserver.com' do
+        links_html = "2. Korinther <a href=\"https://bibleserver.com/LUT/2.Korinther1,3-6.9\" target=\"_blank\">1,3-6.9</a>; " +
+          + "<a href=\"https://bibleserver.com/LUT/2.Korinther2,5\" target=\"_blank\">2,5</a>"
+        expect(subject.generate_bibleserver_links).to eq(links_html)
+      end
+    end
   end
 
   describe '#valid?' do

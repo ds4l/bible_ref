@@ -30,10 +30,11 @@ module BibleserverCom
         reference = "#{chapter},#{verses}"
         display = reference
       end
+      book_spaceless = book_name.gsub(/\s+/, "")
       if new_tab
-        "<a href=\"#{bibleserver_url}/#{book_name}#{reference}\" target=\"_blank\">#{display}</a>"
+        "<a href=\"#{bibleserver_url}/#{book_spaceless}#{reference}\" target=\"_blank\">#{display}</a>"
       else
-        "<a href=\"#{bibleserver_url}/#{book_name}#{reference}\">#{display}</a>"
+        "<a href=\"#{bibleserver_url}/#{book_spaceless}#{reference}\">#{display}</a>"
       end
     end.join("; ")
   end
