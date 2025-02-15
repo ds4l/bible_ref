@@ -2,9 +2,11 @@ require_relative './languages'
 require_relative './canons'
 require_relative './parser'
 require_relative './parser_german'
+require_relative './bibleserver_com'
 
 module BibleRef
   class Reference
+    include BibleserverCom
     attr_reader :book, :reference, :language, :canon
 
     # Create a new Reference instance by passing in the user-supplied bible reference as a string.
@@ -55,6 +57,7 @@ module BibleRef
     # Returns a normalized passage reference. e.g.
     #
     # 'JOHN 3:16&17' => 'John 3:16,17'
+    # TODO: does not work with German notation yet
     def normalize
       separator = ','
       separator = ';' if german_notation?
@@ -67,40 +70,6 @@ module BibleRef
           ref_part(ref_from)
         end
       end.join(separator)
-    end
-
-    def generate_bibleserver_links(trans: "LUT")
-      bibleserver_url = "https://bibleserver.com/#{trans}"
-      links = book_name + " "
-
-      ranges_by_chapter = {}
-      ranges.each do |range|
-        ranges_by_chapter[range.first[:chapter]] ||= []
-        ranges_by_chapter[range.first[:chapter]] << range
-      end
-
-      links + ranges_by_chapter.map do |chapter, ranges|
-        verses = ranges.map do |(ref_from, ref_to)|
-          if ref_from != ref_to
-            "#{ref_from[:verse]}-#{ref_to[:verse]}"
-          else
-            if ref_from[:verse]
-              "#{ref_from[:verse]}"
-            else
-              # Full chapter
-              ""
-            end
-          end
-        end.join(".")
-        if verses.empty?
-          reference = "#{chapter}"
-          display = reference
-        else
-          reference = "#{chapter},#{verses}"
-          display = reference
-        end
-        "<a href=\"#{bibleserver_url}/#{book_name}#{reference}\">#{display}</a>"
-      end.join("; ")
     end
 
     def german_notation?
